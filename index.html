@@ -1014,5 +1014,35 @@ function starteNeueWoche(){
 
 </script>
 
-</body>
+<script>
+const SUPABASE_URL = "https://adgvgtzbdlqtefznxkzg.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFkZ3ZndHpiZGxxdGVmem54a3pnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAxODU5NzgsImV4cCI6MjEwNTc2MTk3OH0.0brPR_2kBgSYlMVo8uxRfXtmDpy_BOcBQaIjqz5bW8I";
+
+async function testeSupabaseLesen() {
+  try {
+    const response = await fetch(
+      SUPABASE_URL + "/rest/v1/class_state?id=eq.1&select=*",
+      {
+        headers: {
+          "apikey": SUPABASE_ANON_KEY,
+          "Authorization": "Bearer " + SUPABASE_ANON_KEY
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error("Supabase Lesefehler:", data);
+      return;
+    }
+
+    console.log("SUPABASE TEST ERFOLGREICH:", data);
+  } catch (error) {
+    console.error("Supabase Verbindung fehlgeschlagen:", error);
+  }
+}
+
+testeSupabaseLesen();
+</script></body>
 </html>

@@ -1038,6 +1038,10 @@ async function testeSupabaseLesen() {
     }
 
     console.log("SUPABASE TEST ERFOLGREICH:", data);
+    alert(
+  "Supabase-Verbindung klappt!\n\nWochenziel: " +
+  (data[0]?.weekly_goal || "kein Wochenziel gefunden")
+);
   } catch (error) {
     console.error("Supabase Verbindung fehlgeschlagen:", error);
   }

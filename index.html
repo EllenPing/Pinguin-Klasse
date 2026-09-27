@@ -1083,9 +1083,9 @@ gespeicherteErgebnisse.forEach((ergebnis, index) => {
 });
 
 // Erfolgreiche Wochen wiederherstellen
-   alert("Wochenzahl-Felder gefunden: " + document.querySelectorAll("#wochenzahl").length);
+   
     erfolgreicheWochen = Number(state.successful_weeks || 0);
-document.getElementById("wochenzahl").textContent = erfolgreicheWochen;
+document.getElementById("wochenZahl").textContent = erfolgreicheWochen;
 
 // Wochenstatus wiederherstellen
 wocheSchonGewertet = state.week_evaluated === true;

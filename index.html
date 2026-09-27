@@ -798,6 +798,7 @@ function speichereErgebnis(symbol){
   schliesseReflexion();
 
   pruefeWoche();
+speichereSupabaseState();
 }
 
 
@@ -1109,6 +1110,50 @@ console.log("Supabase-Zustand vollständig geladen:", state);
     console.error("Supabase-Verbindungsfehler:", error);
   }
 }
+async function speichereSupabaseState() {
+  try {
+    const felder = document.querySelectorAll(".tag .ergebnis");
 
+    const wertFuerSupabase = (feld) => {
+      if (!feld || !feld.dataset.symbol) return null;
+      return feld.dataset.symbol === "🐧" ? "penguin" : "iceberg";
+    };
+
+    const state = {
+      weekly_goal: document.getElementById("wochenzielText").textContent.trim(),
+      result_mo: wertFuerSupabase(felder[0]),
+      result_di: wertFuerSupabase(felder[1]),
+      result_mi: wertFuerSupabase(felder[2]),
+      result_do: wertFuerSupabase(felder[3]),
+      result_fr: wertFuerSupabase(felder[4]),
+      successful_weeks: erfolgreicheWochen,
+      week_evaluated: wocheSchonGewertet
+    };
+
+    const response = await fetch(
+      SUPABASE_URL + "/rest/v1/class_state?id=eq.1",
+      {
+        method: "PATCH",
+        headers: {
+          "apikey": SUPABASE_ANON_KEY,
+          "Authorization": "Bearer " + SUPABASE_ANON_KEY,
+          "Content-Type": "application/json",
+          "Prefer": "return=representation"
+        },
+        body: JSON.stringify(state)
+      }
+    );
+
+    if (!response.ok) {
+      const fehler = await response.text();
+      console.error("Supabase-Speicherfehler:", fehler);
+      return;
+    }
+
+    console.log("Supabase-Zustand gespeichert.");
+  } catch (error) {
+    console.error("Supabase-Speicherfehler:", error);
+  }
+}
 ladeSupabaseState();</script></body>
 </html>

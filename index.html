@@ -1018,7 +1018,7 @@ function starteNeueWoche(){
 const SUPABASE_URL = "https://adgvgtzbdlqtefznxkzg.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFkZ3ZndHpiZGxxdGVmem54a3pnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAxODU5NzgsImV4cCI6MjEwNTc2MTk3OH0.0brPR_2kBgSYlMVo8uxRfXtmDpy_BOcBQaIjqz5bW8I";
 
-async function testeSupabaseLesen() {
+async function ladeSupabaseState() {
   try {
     const response = await fetch(
       SUPABASE_URL + "/rest/v1/class_state?id=eq.1&select=*",
@@ -1033,28 +1033,31 @@ async function testeSupabaseLesen() {
     const data = await response.json();
 
     if (!response.ok) {
-  alert(
-    "Supabase-Fehler!\n\nStatus: " +
-    response.status +
-    "\n\n" +
-    JSON.stringify(data)
-  );
-  return;
-}
+      console.error("Supabase-Ladefehler:", data);
+      return;
+    }
 
-    console.log("SUPABASE TEST ERFOLGREICH:", data);
+    if (!data.length) {
+      console.error("Kein Datensatz in class_state gefunden.");
+      return;
+    }
+
+    const state = data[0];
+
+    console.log("Supabase-Zustand geladen:", state);
+
     alert(
-  "Supabase-Verbindung klappt!\n\nWochenziel: " +
-  (data[0]?.weekly_goal || "kein Wochenziel gefunden")
-);
+      "Laden klappt!\n\n" +
+      "Wochenziel: " + state.weekly_goal + "\n" +
+      "MO: " + (state.result_mo || "leer") + "\n" +
+      "DI: " + (state.result_di || "leer") + "\n" +
+      "Erfolgreiche Wochen: " + state.successful_weeks
+    );
+
   } catch (error) {
-  alert(
-    "Verbindungsfehler!\n\n" +
-    error.message
-  );
-}
+    console.error("Supabase-Verbindungsfehler:", error);
+  }
 }
 
-testeSupabaseLesen();
-</script></body>
+ladeSupabaseState();</script></body>
 </html>

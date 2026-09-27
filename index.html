@@ -1033,9 +1033,14 @@ async function testeSupabaseLesen() {
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("Supabase Lesefehler:", data);
-      return;
-    }
+  alert(
+    "Supabase-Fehler!\n\nStatus: " +
+    response.status +
+    "\n\n" +
+    JSON.stringify(data)
+  );
+  return;
+}
 
     console.log("SUPABASE TEST ERFOLGREICH:", data);
     alert(
@@ -1043,8 +1048,11 @@ async function testeSupabaseLesen() {
   (data[0]?.weekly_goal || "kein Wochenziel gefunden")
 );
   } catch (error) {
-    console.error("Supabase Verbindung fehlgeschlagen:", error);
-  }
+  alert(
+    "Verbindungsfehler!\n\n" +
+    error.message
+  );
+}
 }
 
 testeSupabaseLesen();

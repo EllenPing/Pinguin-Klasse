@@ -1043,17 +1043,67 @@ async function ladeSupabaseState() {
     }
 
     const state = data[0];
-    document.getElementById("wochenzielText").textContent = state.weekly_goal;
 
-    console.log("Supabase-Zustand geladen:", state);
+// Wochenziel wiederherstellen
+document.getElementById("wochenzielText").textContent = state.weekly_goal;
 
-    alert(
-      "Laden klappt!\n\n" +
-      "Wochenziel: " + state.weekly_goal + "\n" +
-      "MO: " + (state.result_mo || "leer") + "\n" +
-      "DI: " + (state.result_di || "leer") + "\n" +
-      "Erfolgreiche Wochen: " + state.successful_weeks
-    );
+// Tagesergebnisse wiederherstellen
+const felder = document.querySelectorAll(".tag .ergebnis");
+
+const gespeicherteErgebnisse = [
+  state.result_mo,
+  state.result_di,
+  state.result_mi,
+  state.result_do,
+  state.result_fr
+];
+
+gespeicherteErgebnisse.forEach((ergebnis, index) => {
+  const feld = felder[index];
+
+  feld.innerHTML = "";
+  feld.dataset.symbol = "";
+
+  if (!ergebnis) return;
+
+  if (ergebnis === "penguin") {
+    feld.dataset.symbol = "🐧";
+    feld.innerHTML =
+      '<img src="' +
+      pinguinKopfBild +
+      '" alt="Pinguin">';
+  } else {
+    feld.dataset.symbol = "❄️";
+    feld.innerHTML =
+      '<img src="' +
+      eisbergBild +
+      '" alt="Eisberg">';
+  }
+});
+
+// Erfolgreiche Wochen wiederherstellen
+erfolgreicheWochen = Number(state.successful_weeks || 0);
+document.getElementById("wochenzahl").textContent = erfolgreicheWochen;
+
+// Wochenstatus wiederherstellen
+wocheSchonGewertet = state.week_evaluated === true;
+    document.getElementById("neueWocheButton").style.display =
+  wocheSchonGewertet ? "block" : "none";
+
+// Arktis passend zum Wochenstand wiederherstellen
+if (erfolgreicheWochen >= 1) {
+  document.getElementById("eisscholle").style.display = "block";
+}
+
+if (erfolgreicheWochen >= 2) {
+  document.getElementById("schollenPinguin").style.display = "block";
+}
+
+if (erfolgreicheWochen >= 3) {
+  document.getElementById("seerobbe").style.display = "block";
+}
+
+console.log("Supabase-Zustand vollständig geladen:", state);
 
   } catch (error) {
     console.error("Supabase-Verbindungsfehler:", error);

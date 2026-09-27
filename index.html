@@ -1043,6 +1043,7 @@ async function ladeSupabaseState() {
     }
 
     const state = data[0];
+    document.getElementById("wochenzielText").textContent = state.weekly_goal;
 
     console.log("Supabase-Zustand geladen:", state);
 

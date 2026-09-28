@@ -144,7 +144,38 @@ body{
   font-size:15px;
   font-weight:700;
 }
+/* STUNDENLEISTE RECHTS */
 
+.stunden{
+  position:fixed;
+  right:1%;
+  top:22%;
+  z-index:6;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.stunde{
+  width:68px;
+  height:68px;
+  border-radius:50%;
+  background:rgba(255,255,255,.95);
+  border:2px solid rgba(255,255,255,.95);
+  box-shadow:0 4px 12px rgba(30,88,120,.16);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding-top:8px;
+  box-sizing:border-box;
+  color:#28637f;
+}
+
+.stunde span{
+  font-size:15px;
+  font-weight:700;
+}
 .tag .ergebnis{
   margin-top:1px;
   min-height:34px;
@@ -499,7 +530,13 @@ body{
   <div class="tag"><span>FR</span><div class="ergebnis"></div></div>
 
 </div>
-
+<!-- STUNDENLEISTE RECHTS -->
+<div class="stunden">
+  <div class="stunde"><span>1.</span><div class="stundenErgebnis"></div></div>
+  <div class="stunde"><span>2.</span><div class="stundenErgebnis"></div></div>
+  <div class="stunde"><span>3.</span><div class="stundenErgebnis"></div></div>
+  <div class="stunde"><span>4.</span><div class="stundenErgebnis"></div></div>
+</div>
 
 <!-- BUTTONS -->
 

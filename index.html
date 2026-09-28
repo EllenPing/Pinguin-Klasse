@@ -841,6 +841,7 @@ if(ausgewaehlteStunde !== null){
 
   ausgewaehlteStunde = null;
   schliesseReflexion();
+  speichereSupabaseState();
   return;
 }
   const felder =
@@ -1187,7 +1188,8 @@ console.log("Supabase-Zustand vollständig geladen:", state);
 async function speichereSupabaseState() {
   try {
     const felder = document.querySelectorAll(".tag .ergebnis");
-
+const stundenFelder =
+  document.querySelectorAll(".stundenErgebnis");
     const wertFuerSupabase = (feld) => {
       if (!feld || !feld.dataset.symbol) return null;
       return feld.dataset.symbol === "🐧" ? "penguin" : "iceberg";
@@ -1200,6 +1202,10 @@ async function speichereSupabaseState() {
       result_mi: wertFuerSupabase(felder[2]),
       result_do: wertFuerSupabase(felder[3]),
       result_fr: wertFuerSupabase(felder[4]),
+      lesson_1: wertFuerSupabase(stundenFelder[0]),
+lesson_2: wertFuerSupabase(stundenFelder[1]),
+lesson_3: wertFuerSupabase(stundenFelder[2]),
+lesson_4: wertFuerSupabase(stundenFelder[3]),
       successful_weeks: erfolgreicheWochen,
       week_evaluated: wocheSchonGewertet
     };

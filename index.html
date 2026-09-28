@@ -811,7 +811,32 @@ function waehleTag(n,button){
 
 
 function speichereErgebnis(symbol){
+if(ausgewaehlteStunde !== null){
 
+  const stundenFelder =
+    document.querySelectorAll(".stundenErgebnis");
+
+  const feld =
+    stundenFelder[ausgewaehlteStunde];
+
+  feld.dataset.symbol = symbol;
+
+  if(symbol === "🐧"){
+    feld.innerHTML =
+      '<img src="' +
+      pinguinKopfBild +
+      '" alt="Blüte">';
+  } else {
+    feld.innerHTML =
+      '<img src="' +
+      eisbergBild +
+      '" alt="Samen">';
+  }
+
+  ausgewaehlteStunde = null;
+  schliesseReflexion();
+  return;
+}
   const felder =
     document.querySelectorAll(".tag .ergebnis");
 

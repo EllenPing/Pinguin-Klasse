@@ -139,7 +139,12 @@ body{
   box-sizing:border-box;
   color:#28637f;
 }
-
+.tag.stundenTagAktiv{
+  box-shadow:
+    0 0 0 4px rgba(255,255,255,.75),
+    0 0 0 7px rgba(76,169,210,.75),
+    0 4px 12px rgba(30,88,120,.16);
+}
 .tag span{
   font-size:15px;
   font-weight:700;
@@ -529,11 +534,11 @@ body{
 
 <div class="tage">
 
-  <div class="tag"><span>MO</span><div class="ergebnis"></div></div>
-  <div class="tag"><span>DI</span><div class="ergebnis"></div></div>
-  <div class="tag"><span>MI</span><div class="ergebnis"></div></div>
-  <div class="tag"><span>DO</span><div class="ergebnis"></div></div>
-  <div class="tag"><span>FR</span><div class="ergebnis"></div></div>
+  <div class="tag" onclick="waehleStundenTag('MO', this)"><span>MO</span><div class="ergebnis"></div></div>
+<div class="tag" onclick="waehleStundenTag('DI', this)"><span>DI</span><div class="ergebnis"></div></div>
+<div class="tag" onclick="waehleStundenTag('MI', this)"><span>MI</span><div class="ergebnis"></div></div>
+<div class="tag" onclick="waehleStundenTag('DO', this)"><span>DO</span><div class="ergebnis"></div></div>
+<div class="tag" onclick="waehleStundenTag('FR', this)"><span>FR</span><div class="ergebnis"></div></div>
 
 </div>
 <!-- STUNDENLEISTE RECHTS -->
@@ -781,7 +786,20 @@ speichereSupabaseState();
 
 
 /* REFLEXION */
-let ausgewaehlteStunde = null;
+let aktuellerStundenTag = null;
+
+function waehleStundenTag(tag, element){
+
+  aktuellerStundenTag = tag;
+
+  document.querySelectorAll(".tag").forEach(function(t){
+    t.classList.remove("stundenTagAktiv");
+  });
+
+  element.classList.add("stundenTagAktiv");
+
+}
+  let ausgewaehlteStunde = null;
 
 function oeffneStundenReflexion(stunde){
   ausgewaehlteStunde = stunde;

@@ -1155,7 +1155,35 @@ gespeicherteErgebnisse.forEach((ergebnis, index) => {
       '" alt="Eisberg">';
   }
 });
+// Stunden-Ergebnisse wiederherstellen
+const stundenFelder =
+  document.querySelectorAll(".stundenErgebnis");
 
+const gespeicherteStunden = [
+  state.lesson_1,
+  state.lesson_2,
+  state.lesson_3,
+  state.lesson_4
+];
+
+gespeicherteStunden.forEach((ergebnis, index) => {
+  const feld = stundenFelder[index];
+
+  feld.innerHTML = "";
+  feld.dataset.symbol = "";
+
+  if (!ergebnis) return;
+
+  if (ergebnis === "penguin") {
+    feld.dataset.symbol = "🐧";
+    feld.innerHTML =
+      '<img src="https://i.ibb.co/JjZHzVWG/7-FB6-AE73-FCEE-40-DF-94-A2-5-AE8-DBFA8290.png" alt="Blüte">';
+  } else {
+    feld.dataset.symbol = "❄️";
+    feld.innerHTML =
+      '<img src="https://i.ibb.co/wx7ydx9/CA9-A2882-422-E-4267-A9-A0-7580-F7565-ADA.png" alt="Samen">';
+  }
+});
 // Erfolgreiche Wochen wiederherstellen
    
     erfolgreicheWochen = Number(state.successful_weeks || 0);

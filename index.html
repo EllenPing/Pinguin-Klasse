@@ -1202,6 +1202,23 @@ gespeicherteStunden.forEach((ergebnis, index) => {
       '<img src="https://i.ibb.co/wx7ydx9/CA9-A2882-422-E-4267-A9-A0-7580-F7565-ADA.png" alt="Samen">';
   }
 });
+    // Ausgewählten Stundentag wiederherstellen
+aktuellerStundenTag = state.lesson_day || null;
+
+if (aktuellerStundenTag) {
+  const tage = document.querySelectorAll(".tag");
+  const tagIndex = {
+    MO: 0,
+    DI: 1,
+    MI: 2,
+    DO: 3,
+    FR: 4
+  }[aktuellerStundenTag];
+
+  if (tagIndex !== undefined) {
+    tage[tagIndex].classList.add("stundenTagAktiv");
+  }
+}
 // Erfolgreiche Wochen wiederherstellen
    
     erfolgreicheWochen = Number(state.successful_weeks || 0);

@@ -797,7 +797,7 @@ function waehleStundenTag(tag, element){
   });
 
   element.classList.add("stundenTagAktiv");
-
+speichereSupabaseState();
 }
   let ausgewaehlteStunde = null;
 
@@ -1252,6 +1252,7 @@ const stundenFelder =
 lesson_2: wertFuerSupabase(stundenFelder[1]),
 lesson_3: wertFuerSupabase(stundenFelder[2]),
 lesson_4: wertFuerSupabase(stundenFelder[3]),
+      lesson_day: aktuellerStundenTag,
       successful_weeks: erfolgreicheWochen,
       week_evaluated: wocheSchonGewertet
     };

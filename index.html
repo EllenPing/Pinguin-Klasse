@@ -1127,7 +1127,19 @@ function starteNeueWoche(){
       delete feld.dataset.symbol;
 
     });
+// STUNDEN 1–4 LEEREN
+document.querySelectorAll(".stundenErgebnis")
+  .forEach(function(feld){
+    feld.innerHTML = "";
+    delete feld.dataset.symbol;
+  });
 
+// AUSGEWÄHLTEN STUNDENTAG ZURÜCKSETZEN
+aktuellerStundenTag = null;
+
+document.querySelectorAll(".tag").forEach(function(tag){
+  tag.classList.remove("stundenTagAktiv");
+});
 
   /*
      TAGESAUSWAHL ZURÜCKSETZEN

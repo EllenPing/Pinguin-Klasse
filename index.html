@@ -560,7 +560,7 @@ body{
 
 <button
   class="reflexion"
-  onclick="oeffneReflexion()">
+  onclick="oeffneTagesReflexion()"
   💭 Tagesreflexion
 </button>
 
@@ -615,13 +615,13 @@ body{
       ×
     </button>
 
-    <h2>Unsere Tagesreflexion</h2>
+    <h2 id="reflexionsTitel">Unsere Tagesreflexion</h2>
 
-    <p>
+    <p id="reflexionsFrage">
       Wie hat es heute mit unserem Wochenziel geklappt?
     </p>
 
-    <div class="tagauswahl">
+    <div class="tagauswahl" id="reflexionsTage">
 
       <button onclick="waehleTag(0,this)">MO</button>
       <button onclick="waehleTag(1,this)">DI</button>
@@ -815,9 +815,36 @@ function waehleStundenTag(tag, element){
   let ausgewaehlteStunde = null;
 
 function oeffneStundenReflexion(stunde){
+
   ausgewaehlteStunde = stunde;
+
+  document.getElementById("reflexionsTitel").textContent =
+    "Wie war die Stunde?";
+
+  document.getElementById("reflexionsFrage").style.display =
+    "none";
+
+  document.getElementById("reflexionsTage").style.display =
+    "none";
+
   oeffneReflexion();
 }
+  
+function oeffneTagesReflexion(){
+
+  ausgewaehlteStunde = null;
+
+  document.getElementById("reflexionsTitel").textContent =
+    "Unsere Tagesreflexion";
+
+  document.getElementById("reflexionsFrage").style.display =
+    "";
+
+  document.getElementById("reflexionsTage").style.display =
+    "";
+
+  oeffneReflexion();
+}  
 function oeffneReflexion(){
 
   document.getElementById("reflexionsFenster").style.display =

@@ -859,8 +859,55 @@ if(ausgewaehlteStunde !== null){
 
   ausgewaehlteStunde = null;
   schliesseReflexion();
+  pruefeStundenTag();
   speichereSupabaseState();
   return;
+}
+  function pruefeStundenTag(){
+
+  const stundenFelder =
+    document.querySelectorAll(".stundenErgebnis");
+
+  // Erst auswerten, wenn alle 4 Stunden eingetragen sind
+  const alleGefuellt =
+    Array.from(stundenFelder).every(
+      feld => feld.dataset.symbol
+    );
+
+  if (!alleGefuellt) return;
+  if (!aktuellerStundenTag) return;
+
+  // Erfolgreiche Stunden zählen
+  const erfolgreicheStunden =
+    Array.from(stundenFelder).filter(
+      feld => feld.dataset.symbol === "🐧"
+    ).length;
+
+  const tage = document.querySelectorAll(".tag");
+  const tagIndex = {
+    MO: 0,
+    DI: 1,
+    MI: 2,
+    DO: 3,
+    FR: 4
+  }[aktuellerStundenTag];
+
+  if (tagIndex === undefined) return;
+
+  const tagesFeld =
+    tage[tagIndex].querySelector(".ergebnis");
+
+  if (erfolgreicheStunden >= 3) {
+    tagesFeld.dataset.symbol = "🐧";
+    tagesFeld.innerHTML =
+      '<img src="https://i.ibb.co/JjZHzVWG/7-FB6-AE73-FCEE-40-DF-94-A2-5-AE8-DBFA8290.png" alt="Blüte">';
+  } else {
+    tagesFeld.dataset.symbol = "❄️";
+    tagesFeld.innerHTML =
+      '<img src="https://i.ibb.co/wx7ydx9/CA9-A2882-422-E-4267-A9-A0-7580-F7565-ADA.png" alt="Samen">';
+  }
+
+  pruefeWoche();
 }
   const felder =
     document.querySelectorAll(".tag .ergebnis");

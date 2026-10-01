@@ -790,6 +790,18 @@ let aktuellerStundenTag = null;
 
 function waehleStundenTag(tag, element){
 
+  const tagGewechselt =
+    aktuellerStundenTag !== null &&
+    aktuellerStundenTag !== tag;
+
+  if (tagGewechselt) {
+    document.querySelectorAll(".stundenErgebnis")
+      .forEach(function(feld){
+        feld.innerHTML = "";
+        feld.dataset.symbol = "";
+      });
+  }
+
   aktuellerStundenTag = tag;
 
   document.querySelectorAll(".tag").forEach(function(t){
@@ -797,8 +809,9 @@ function waehleStundenTag(tag, element){
   });
 
   element.classList.add("stundenTagAktiv");
-speichereSupabaseState();
-}
+
+  speichereSupabaseState();
+}  
   let ausgewaehlteStunde = null;
 
 function oeffneStundenReflexion(stunde){

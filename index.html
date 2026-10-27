@@ -543,7 +543,18 @@ body{
   onclick="frageNeueWoche()">
   ❄️ Neue Woche
 </button>
+<!-- VOLLBILD-STEUERUNG -->
+<div style="position:fixed;bottom:3%;right:3%;z-index:50;display:flex;gap:8px;">
 
+  <button onclick="vollbildAn()" title="Vollbild einschalten">
+    ⛶
+  </button>
+
+  <button onclick="vollbildAus()" title="Vollbild beenden">
+    ✕
+  </button>
+
+</div>
 
 
 <!-- WOCHENZIEL MIT STIFT ÄNDERN -->
@@ -1379,5 +1390,27 @@ lesson_4: wertFuerSupabase(stundenFelder[3]),
     console.error("Supabase-Speicherfehler:", error);
   }
 }
-ladeSupabaseState();</script></body>
+// VOLLBILD EINSCHALTEN
+function vollbildAn() {
+  const seite = document.documentElement;
+
+  if (seite.requestFullscreen) {
+    seite.requestFullscreen().catch(function() {
+      alert("Der Browser erlaubt hier leider keinen Vollbildmodus.");
+    });
+  } else {
+    alert("Dieser Browser unterstützt den Vollbildmodus nicht.");
+  }
+}
+
+// VOLLBILD BEENDEN
+function vollbildAus() {
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  }
+}
+
+ladeSupabaseState();
+</script>
+</body>
 </html>

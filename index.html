@@ -1057,7 +1057,11 @@ function pruefeWoche(){
       document.getElementById("seerobbe").style.display =
         "block";
     }
+if(erfolgreicheWochen >= 5){
 
+  document.getElementById("weihnachtsbaum").style.display =
+    "block";
+}
 
     document.getElementById("wochenTitel").textContent =
       "Wir haben unser Wochenziel erreicht! ❄️";
@@ -1344,7 +1348,9 @@ if (erfolgreicheWochen >= 2) {
 if (erfolgreicheWochen >= 3) {
   document.getElementById("seerobbe").style.display = "block";
 }
-
+if (erfolgreicheWochen >= 5) {
+  document.getElementById("weihnachtsbaum").style.display = "block";
+}
 console.log("Supabase-Zustand vollständig geladen:", state);
 
   } catch (error) {

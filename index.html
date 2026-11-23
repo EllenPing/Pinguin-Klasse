@@ -488,6 +488,12 @@ body{
   alt="Verschneiter Weihnachtsbaum"
   style="display:none; position:absolute; width:150px; left:140px; top:-65px; z-index:2;"
 >
+  <img
+  id="nikolausstiefel"
+  src="E5C9DA25-1586-4295-9AF3-550CE248AA78.png"
+  alt="Nikolausstiefel"
+  style="display:none; position:absolute; width:75px; left:195px; top:65px; z-index:4;"
+>
 </div>
 
 
@@ -1062,7 +1068,12 @@ if(erfolgreicheWochen >= 5){
   document.getElementById("weihnachtsbaum").style.display =
     "block";
 }
-
+if(erfolgreicheWochen >= 6){
+  document.getElementById("adventskranz").style.display = "block";
+}
+    if(erfolgreicheWochen >= 7){
+  document.getElementById("nikolausstiefel").style.display = "block";
+}
     document.getElementById("wochenTitel").textContent =
       "Wir haben unser Wochenziel erreicht! ❄️";
 
@@ -1351,7 +1362,13 @@ if (erfolgreicheWochen >= 3) {
 if (erfolgreicheWochen >= 5) {
   document.getElementById("weihnachtsbaum").style.display = "block";
 }
-console.log("Supabase-Zustand vollständig geladen:", state);
+if (erfolgreicheWochen >= 6) {
+  document.getElementById("adventskranz").style.display = "block";
+}
+    if (erfolgreicheWochen >= 7) {
+  document.getElementById("nikolausstiefel").style.display = "block";
+}
+    console.log("Supabase-Zustand vollständig geladen:", state);
 
   } catch (error) {
     console.error("Supabase-Verbindungsfehler:", error);
